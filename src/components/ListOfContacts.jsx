@@ -14,14 +14,8 @@ export const ListOfContacts = () => {
   const filterContacts = useSelector(selectFilter);
   const dispatch = useDispatch();
 
-  const onDeleteContact = id => dispatch(deleteContacts(id));
-
-  let normalFilter = '';
-  if (filterContacts.length > 0) {
-    normalFilter = filterContacts.toLowerCase();
-  }
   const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(normalFilter)
+    contact.name.toLowerCase().includes(filterContacts.toLowerCase())
   );
 
   return (
@@ -34,8 +28,8 @@ export const ListOfContacts = () => {
               {name}: {phone}
             </ContactsInfo>
             <DeleteBtn
-              value={id}
-              onClick={() => dispatch(onDeleteContact(id))}
+              // value={id}
+              onClick={ () => dispatch(deleteContacts(id))}
               type="button"
             >
               Delete

@@ -44,14 +44,7 @@ export const contactsSlice = createSlice({
       );
       state.contacts.splice(index, 1);
     },
-    [deleteContacts.rejected](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      const index = state.items.findIndex(
-        contact => contact.id === action.payload.id
-      );
-      state.items.splice(index, 1, action.payload);
-    },
+    [deleteContacts.rejected]: handleRejected,
   },
   reducers: {
     setFilter(state, action) {
