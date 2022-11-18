@@ -5,8 +5,4 @@ export const store = configureStore({
   reducer: {
     contacts: contactsReducer,
   },
-  // middleware: getDefaultMiddleware => [
-  //   ...getDefaultMiddleware(),
-  //   contactsReducer.middleware,
-  // ],
 });
