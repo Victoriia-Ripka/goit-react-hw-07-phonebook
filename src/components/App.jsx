@@ -2,20 +2,19 @@ import { MyContactForm } from './Form';
 import { Section } from './Section';
 import { ListOfContacts } from './ListOfContacts';
 import { Filter } from './Filter';
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchContacts } from "redux/operations";
-import { selectError, selectIsLoading } from "redux/selectors";
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
+import { selectError, selectIsLoading } from 'redux/selectors';
 
 export default function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading)
-  const error = useSelector(selectError)
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(fetchContacts());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
@@ -23,7 +22,7 @@ export default function App() {
         <MyContactForm />
       </Section>
       <Section title="Contacts">
-        <Filter/>
+        <Filter />
         {isLoading && !error && <b>Request in progress...</b>}
         <ListOfContacts />
       </Section>

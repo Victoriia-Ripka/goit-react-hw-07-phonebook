@@ -23,15 +23,15 @@ export const ListOfContacts = () => {
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(normalFilter)
   );
-// зняти готівку, віддати пані ані, пані аня заплатить
+
   return (
     <ContactsList>
       {visibleContacts.map(item => {
-        const { name, number, id } = item;
+        const { name, phone, id } = item;
         return (
           <ContactsItem key={id}>
             <ContactsInfo>
-              {name}: {number}
+              {name}: {phone}
             </ContactsInfo>
             <DeleteBtn
               value={id}
