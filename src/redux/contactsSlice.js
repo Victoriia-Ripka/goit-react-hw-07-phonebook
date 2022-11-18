@@ -1,6 +1,8 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { fetchContacts, addContacts, deleteContacts } from './operations';
 
+const actions = [fetchContacts, addContacts, deleteContacts]
+
 const handlePending = state => {
   state.isLoading = true;
 };
@@ -19,6 +21,7 @@ export const contactsSlice = createSlice({
     error: null,
   },
   extraReducers: builder =>
+  // можна винести всі функції вище окремо, а тут передавати лінк
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.contacts = action.payload;
@@ -34,25 +37,19 @@ export const contactsSlice = createSlice({
       })
       .addMatcher(
         isAnyOf(
-          fetchContacts.pending,
-          addContacts.pending,
-          deleteContacts.pending
+          ...actions.map(action => action.pending)
         ),
         handlePending
       )
       .addMatcher(
         isAnyOf(
-          fetchContacts.rejected,
-          addContacts.rejected,
-          deleteContacts.rejected
+          ...actions.map(action => action.rejected)
         ),
         handleRejected
       )
       .addMatcher(
         isAnyOf(
-          fetchContacts.fulfilled,
-          addContacts.fulfilled,
-          deleteContacts.fulfilled
+          ...actions.map(action => action.fulfilled)
         ),
         (state, _) => {
           state.isLoading = false;
